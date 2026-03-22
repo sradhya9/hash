@@ -39,8 +39,8 @@ export default function Dashboard() {
   if (!user) return null;
 
   return (
-    <div style={{ padding: '20px', paddingBottom: '100px', minHeight: '100dvh' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px', marginTop: '10px' }}>
+    <div style={{ padding: '20px', paddingBottom: '120px', minHeight: '100dvh', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px', marginTop: '10px', width: '100%', maxWidth: '400px' }}>
         <div>
           <h2 className="cinzel" style={{ fontSize: '1.4rem', color: 'var(--accent-gold)' }}>Divine Reliquary</h2>
           <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', fontStyle: 'italic' }}>Welcome, {user.name}</p>
@@ -48,7 +48,7 @@ export default function Dashboard() {
         <button onClick={handleLogout} style={{ background: 'none', border: '1px solid var(--glass-border)', color: 'var(--text-secondary)', padding: '8px 16px', borderRadius: '20px', cursor: 'pointer', fontFamily: 'Cinzel', fontSize: '0.7rem' }}>Sever Ties</button>
       </div>
 
-      <motion.div className="glass-panel" style={{ padding: '20px', marginBottom: '30px' }}>
+      <motion.div className="glass-panel" style={{ padding: '20px', marginBottom: '30px', width: '100%', maxWidth: '400px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
           <span style={{ fontWeight: 'bold' }}>Divine Sync</span>
           <span style={{ color: 'var(--accent-gold)', fontWeight: 'bold' }}>{loading ? 'Consulting Oracle...' : `${fragments.length} / ${TOTAL_FRAGMENTS}`}</span>
@@ -63,7 +63,9 @@ export default function Dashboard() {
         </div>
       </motion.div>
 
-      <FragmentGrid collectedFragments={fragments} total={TOTAL_FRAGMENTS} />
+      <div style={{ width: '100%', maxWidth: '400px' }}>
+        <FragmentGrid collectedFragments={fragments} total={TOTAL_FRAGMENTS} />
+      </div>
 
       {fragments.length === TOTAL_FRAGMENTS && (
         <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} style={{ textAlign: 'center', marginTop: '30px' }}>

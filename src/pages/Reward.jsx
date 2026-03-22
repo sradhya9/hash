@@ -62,11 +62,10 @@ export default function Reward() {
         </p>
       </motion.div>
 
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2.5 }} style={{ zIndex: 1, width: '100%' }}>
-        <GlowingButton onClick={() => navigate('/dashboard')} variant="secondary">
-          Return to Reliquary
-        </GlowingButton>
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2.5 }} style={{ zIndex: 1, width: '100%', paddingBottom: '80px' }}>
+         <p style={{ color: 'var(--accent-gold)', fontWeight: 'bold' }}>Thy journey is honored.</p>
       </motion.div>
+      <BottomNav />
     </div>
   );
 }

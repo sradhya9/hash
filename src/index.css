@@ -56,6 +56,21 @@ body {
   border-radius: var(--border-radius);
 }
 
+/* Responsive Adjustments */
+@media (max-width: 380px) {
+  .app-container {
+    padding: 0 10px;
+  }
+  .glass-panel {
+    padding: 15px !important;
+  }
+}
+
+@media (max-height: 700px) {
+  h1 { font-size: 2rem !important; }
+  h2 { font-size: 1.5rem !important; }
+}
+
 /* Utility Animations */
 @keyframes float {
   0% { transform: translateY(0px); }

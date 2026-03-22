@@ -8,7 +8,7 @@ export default function FragmentGrid({ collectedFragments, total = 16 }) {
     <div style={{
       display: 'grid',
       gridTemplateColumns: 'repeat(4, 1fr)',
-      gap: '10px',
+      gap: 'clamp(5px, 2vw, 10px)',
       margin: '20px 0',
       perspective: '1000px'
     }}>

@@ -26,7 +26,8 @@ export default function Admin() {
   };
 
   return (
-    <div style={{ padding: '20px', paddingBottom: '100px', minHeight: '100dvh' }}>
+    <div style={{ padding: '20px', paddingBottom: '120px', minHeight: '100dvh', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <div style={{ width: '100%', maxWidth: '400px' }}>
       <h2 className="cinzel" style={{ color: 'var(--accent-gold)', textAlign: 'center', marginBottom: '20px', marginTop: '20px' }}>Oracle's Scrying Chamber</h2>
       
       <div className="glass-panel" style={{ padding: '20px', marginBottom: '20px' }}>
@@ -62,6 +63,7 @@ export default function Admin() {
         </GlowingButton>
       </div>
 
+      </div>
       <BottomNav />
     </div>
   );
