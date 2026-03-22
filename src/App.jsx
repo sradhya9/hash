@@ -6,6 +6,7 @@ import ScanQR from './pages/ScanQR'
 import Reward from './pages/Reward'
 import Restore from './pages/Restore'
 import Admin from './pages/Admin'
+import Goodbye from './pages/Goodbye'
 import GreekBackground from './components/GreekBackground'
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path="/reward" element={<Reward />} />
         <Route path="/restore" element={<Restore />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/goodbye" element={<Goodbye />} />
       </Routes>
     </div>
   )

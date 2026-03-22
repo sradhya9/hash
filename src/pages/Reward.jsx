@@ -9,14 +9,14 @@ export default function Reward() {
 
   return (
     <div style={{
-      minHeight: '100dvh', display: 'flex', flexDirection: 'column', 
-      alignItems: 'center', textAlign: 'center', padding: '40px 20px 120px 20px',
+      minHeight: '100dvh', display: 'flex', flexDirection: 'column',
+      alignItems: 'center', textAlign: 'center', padding: '40px 20px 160px 20px',
       background: 'radial-gradient(circle at center, rgba(255,215,0,0.2) 0%, var(--bg-color) 70%)',
       position: 'relative', overflow: 'auto'
     }}>
-      
+
       {/* Light Burst */}
-      <motion.div 
+      <motion.div
         initial={{ scale: 0, opacity: 1 }}
         animate={{ scale: 10, opacity: 0 }}
         transition={{ duration: 1.5, ease: "easeOut" }}
@@ -43,7 +43,7 @@ export default function Reward() {
         }}
       />
 
-      <motion.h1 
+      <motion.h1
         initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.5 }}
         className="cinzel" style={{ color: 'var(--accent-gold)', textShadow: 'var(--gold-glow)', marginBottom: '20px', fontSize: '2rem', zIndex: 1 }}
       >
@@ -64,7 +64,7 @@ export default function Reward() {
       </motion.div>
 
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2.5 }} style={{ zIndex: 1, width: '100%', paddingBottom: '80px' }}>
-         <p style={{ color: 'var(--accent-gold)', fontWeight: 'bold' }}>Thy journey is honored.</p>
+        <p style={{ color: 'var(--accent-gold)', fontWeight: 'bold' }}>Thy journey is honored.</p>
       </motion.div>
       <BottomNav />
     </div>

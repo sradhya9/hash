@@ -389,8 +389,9 @@ export default function ScanQR() {
       display: 'flex', 
       flexDirection: 'column', 
       alignItems: 'center', 
+      justifyContent: 'center',
       minHeight: '100dvh', 
-      padding: '40px 20px 120px 20px', 
+      padding: '40px 20px 160px 20px', 
       textAlign: 'center', 
       position: 'relative',
       overflow: 'auto'

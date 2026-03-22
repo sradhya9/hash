@@ -33,19 +33,32 @@ export default function Dashboard() {
 
   const handleLogout = () => {
     logoutLocally();
-    navigate('/login');
+    navigate('/goodbye');
   };
 
   if (!user) return null;
 
   return (
-    <div style={{ padding: '20px', paddingBottom: '120px', minHeight: '100dvh', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+    <div style={{ padding: '20px', paddingBottom: '160px', minHeight: '100dvh', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px', marginTop: '10px', width: '100%', maxWidth: '400px' }}>
         <div>
           <h2 className="cinzel" style={{ fontSize: '1.4rem', color: 'var(--accent-gold)' }}>Divine Reliquary</h2>
           <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', fontStyle: 'italic' }}>Welcome, {user.name}</p>
         </div>
-        <button onClick={handleLogout} style={{ background: 'none', border: '1px solid var(--glass-border)', color: 'var(--text-secondary)', padding: '8px 16px', borderRadius: '20px', cursor: 'pointer', fontFamily: 'Cinzel', fontSize: '0.7rem' }}>Sever Ties</button>
+        <button onClick={handleLogout} style={{ 
+          background: '#B8860B', 
+          border: '1px solid var(--glass-border)', 
+          color: '#FDF5E6', 
+          padding: '8px 16px', 
+          borderRadius: '20px', 
+          cursor: 'pointer', 
+          fontFamily: 'Cinzel', 
+          fontSize: '0.7rem',
+          fontWeight: 'bold',
+          boxShadow: '0 4px 10px rgba(0,0,0,0.2)'
+        }}>
+          Sever Ties
+        </button>
       </div>
 
       <motion.div className="glass-panel" style={{ padding: '20px', marginBottom: '30px', width: '100%', maxWidth: '400px' }}>
@@ -58,7 +71,7 @@ export default function Dashboard() {
             initial={{ width: 0 }}
             animate={{ width: `${(fragments.length / TOTAL_FRAGMENTS) * 100}%` }}
             transition={{ duration: 1, ease: 'easeOut' }}
-            style={{ height: '100%', background: 'linear-gradient(90deg, #f5f5dc, #556b2f)' }}
+            style={{ height: '100%', background: 'linear-gradient(90deg, #D2B48C, #8B4513)' }}
           />
         </div>
       </motion.div>
