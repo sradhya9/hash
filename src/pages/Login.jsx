@@ -58,6 +58,7 @@ export default function Login() {
       display: 'flex', 
       flexDirection: 'column', 
       alignItems: 'center', 
+      justifyContent: 'center',
       minHeight: '100dvh', 
       padding: '40px 20px', 
       textAlign: 'center',
