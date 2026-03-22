@@ -53,7 +53,7 @@ export default function FragmentGrid({ collectedFragments, total = 16 }) {
               height: '100%',
               backfaceVisibility: 'hidden',
               transform: 'rotateY(180deg)',
-              backgroundImage: 'url("https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&fit=crop")',
+              backgroundImage: 'url("/hash_logo_complete.png")',
               backgroundSize: '400% 400%',
               backgroundPosition: `${(index % 4) * 33.33}% ${Math.floor(index / 4) * 33.33}%`,
               border: '1px solid var(--accent-gold)',

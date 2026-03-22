@@ -1,12 +1,12 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Camera, UploadCloud } from 'lucide-react';
+import { LayoutGrid, Camera } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function BottomNav() {
   const navItems = [
-    { path: '/scan', icon: <Camera size={24} />, label: 'Scanner' },
-    { path: '/restore', icon: <UploadCloud size={24} />, label: 'Restoration Portal' }
+    { path: '/dashboard', icon: <LayoutGrid size={24} />, label: 'Dashboard' },
+    { path: '/scan', icon: <Camera size={24} />, label: 'Scanner' }
   ];
 
   return (

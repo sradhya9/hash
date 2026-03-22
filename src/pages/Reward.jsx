@@ -1,20 +1,10 @@
-import React, { useEffect } from 'react';
-import { useGame } from '../contexts/GameContext';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import GlowingButton from '../components/GlowingButton';
 
 export default function Reward() {
-  const { completed } = useGame();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!completed) {
-      navigate('/dashboard');
-    }
-  }, [completed, navigate]);
-
-  if (!completed) return null;
 
   return (
     <div style={{
@@ -42,7 +32,7 @@ export default function Reward() {
         transition={{ type: 'spring', damping: 12, stiffness: 50, duration: 2, delay: 0.5 }}
         style={{
           width: '200px', height: '200px', borderRadius: '50%',
-          backgroundImage: 'url("https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&fit=crop")',
+          backgroundImage: 'url("/hash_logo_complete.png")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           boxShadow: '0 0 100px var(--accent-gold)',
@@ -68,8 +58,8 @@ export default function Reward() {
       </motion.p>
 
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2.5 }} style={{ zIndex: 1, width: '100%' }}>
-        <GlowingButton onClick={() => navigate('/dashboard')} variant="secondary">
-          Return to Dashboard
+        <GlowingButton onClick={() => navigate('/restore')} variant="secondary">
+          Return to Portal
         </GlowingButton>
       </motion.div>
     </div>

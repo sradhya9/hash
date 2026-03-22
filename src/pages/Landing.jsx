@@ -56,8 +56,8 @@ export default function Landing() {
           Collect the 16 fragments scattered across the realm. Restore the divine relic.
         </p>
 
-        <GlowingButton onClick={() => navigate('/restore')}>
-          Access Portal
+        <GlowingButton onClick={() => navigate('/login')}>
+          Begin Quest
         </GlowingButton>
       </motion.div>
     </div>
