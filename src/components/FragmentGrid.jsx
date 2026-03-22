@@ -46,23 +46,19 @@ export default function FragmentGrid({ collectedFragments, total = 16 }) {
               {index + 1}
             </div>
 
-            {/* Back (Unlocked) */}
+            {/* Back (Unlocked) - Puzzle Piece */}
             <div className="glass-panel" style={{
               position: 'absolute',
               width: '100%',
               height: '100%',
               backfaceVisibility: 'hidden',
               transform: 'rotateY(180deg)',
-              background: 'linear-gradient(135deg, rgba(0, 229, 255, 0.2), rgba(176, 38, 255, 0.2))',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              border: '1px solid var(--accent-blue)',
-              boxShadow: 'var(--glow-shadow)',
-              color: 'var(--accent-gold)'
-            }}>
-              <img src={`https://api.dicebear.com/7.x/shapes/svg?seed=${fragId}&backgroundColor=transparent`} alt="Fragment" style={{ width: '80%', height: '80%' , filter: 'drop-shadow(0 0 5px var(--accent-blue))'}} />
-            </div>
+              backgroundImage: 'url("https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&fit=crop")',
+              backgroundSize: '400% 400%',
+              backgroundPosition: `${(index % 4) * 33.33}% ${Math.floor(index / 4) * 33.33}%`,
+              border: '1px solid var(--accent-gold)',
+              boxShadow: 'var(--gold-glow)',
+            }} />
           </motion.div>
         );
       })}

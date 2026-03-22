@@ -23,7 +23,7 @@ export default function ScanQR() {
     if (gameLoading) return;
 
     if (!fragmentId) {
-      setStatus('error');
+      setStatus('waiting');
       return;
     }
 
@@ -37,6 +37,16 @@ export default function ScanQR() {
   }, [currentUser, fragmentId, gameLoading]);
 
   const renderContent = () => {
+    if (status === 'waiting') {
+      return (
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <h2 className="cinzel" style={{ color: 'var(--accent-blue)' }}>Camera Ready</h2>
+          <p style={{ margin: '20px 0', color: 'var(--text-secondary)' }}>Use your phone's native camera app to scan the physical relic QR codes hidden around the event!</p>
+          <GlowingButton onClick={() => navigate('/dashboard')} variant="secondary">Return</GlowingButton>
+        </motion.div>
+      );
+    }
+
     if (status === 'unauth') {
       return (
         <motion.div initial={{ scale: 0.8 }} animate={{ scale: 1 }}>

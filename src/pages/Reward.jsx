@@ -42,14 +42,15 @@ export default function Reward() {
         transition={{ type: 'spring', damping: 12, stiffness: 50, duration: 2, delay: 0.5 }}
         style={{
           width: '200px', height: '200px', borderRadius: '50%',
-          background: 'linear-gradient(45deg, var(--accent-gold), var(--accent-purple))',
+          backgroundImage: 'url("https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&fit=crop")',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
           boxShadow: '0 0 100px var(--accent-gold)',
+          border: '4px solid var(--accent-gold)',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           marginBottom: '40px', zIndex: 1
         }}
-      >
-        <span className="cinzel" style={{ fontSize: '4rem', color: '#000' }}>H</span>
-      </motion.div>
+      />
 
       <motion.h1 
         initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.5 }}

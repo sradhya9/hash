@@ -65,11 +65,17 @@ export function GameProvider({ children }) {
     fetchUserData();
   }, [currentUser]);
 
-  const unlockFragment = async (fragmentId) => {
+  const unlockFragment = async (rawId) => {
     if (!currentUser) return { status: 'error' };
     
-    const validIds = Array.from({length: TOTAL_FRAGMENTS}, (_, i) => `fragment_${i+1}`);
-    if (!validIds.includes(fragmentId)) return { status: 'error' };
+    let parsedNum = rawId.toString().replace('fragment_', '');
+    parsedNum = parseInt(parsedNum, 10);
+    
+    if (isNaN(parsedNum) || parsedNum < 1 || parsedNum > TOTAL_FRAGMENTS) {
+      return { status: 'error' };
+    }
+    
+    const fragmentId = `fragment_${parsedNum}`;
 
     if (fragments.includes(fragmentId)) {
       return { status: 'duplicate' };

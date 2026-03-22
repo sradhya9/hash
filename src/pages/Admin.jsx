@@ -19,7 +19,7 @@ export default function Admin() {
     );
   }
 
-  const fragments = Array.from({ length: TOTAL_FRAGMENTS }, (_, i) => `fragment_${i + 1}`);
+  const fragments = Array.from({ length: TOTAL_FRAGMENTS }, (_, i) => `${i + 1}`);
 
   const testUnlock = async (id) => {
     navigate(`/scan?id=${id}`);
