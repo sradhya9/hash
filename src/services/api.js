@@ -1,7 +1,7 @@
 // src/services/api.js
 
 // PASTE YOUR DEPLOYED GOOGLE APPS SCRIPT URL HERE:
-export const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzxvmDkmvlxc-ZXCxhgFy5K9RtvaP47VZ7ZPGJgNtASNWjroDE-92ewkyigQ6MjBnXI/exec";
+export const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyw1RrIa5UO0mmppVxFnY4GqDhJtDeIbWjqhAsJHXyZJ2L_44eUOEDleMhhI2UhG4RY/exec";
 
 export const saveUserLocally = (name, phone) => {
   localStorage.setItem('hash_user_v2', JSON.stringify({ name, phone }));
@@ -28,16 +28,27 @@ export const apiCall = async (action, payload = {}) => {
   };
 
   try {
-    const response = await fetch(SCRIPT_URL, {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "text/plain;charset=utf-8",
-      }
+    // Generate query string for GET request
+    const params = new URLSearchParams(data).toString();
+    const urlWithParams = `${SCRIPT_URL}?${params}`;
+
+    console.log("Calling Oracle at:", urlWithParams);
+    const response = await fetch(urlWithParams, {
+      method: "GET",
+      mode: "cors",
+      redirect: "follow",
     });
 
-    const json = await response.json();
-    return json;
+    const text = await response.text();
+    console.log("Oracle Response Text:", text);
+
+    try {
+      const json = JSON.parse(text);
+      return json;
+    } catch (e) {
+      console.error("Oracle spoke in riddles (Invalid JSON):", text);
+      return { error: "The Oracle spoke in riddles. (Invalid Response)" };
+    }
   } catch (err) {
     console.error("API Error:", err);
     return { error: "The Oracle is silent. The thread of fate has been severed." };

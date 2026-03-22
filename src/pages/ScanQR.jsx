@@ -37,7 +37,12 @@ export default function ScanQR() {
 
   const TOTAL_FRAGMENTS = 16;
 
+  const userPhone = user?.phone;
+
   useEffect(() => {
+    // Only proceed if we aren't already in a final state (new discovery or error)
+    if (status === 'new' || status === 'error') return;
+
     if (!user) {
       if (rawId) {
         localStorage.setItem('pending_scan', rawId);
@@ -57,9 +62,18 @@ export default function ScanQR() {
     return () => {
       stopScanner();
     };
-  }, [rawId, navigate, user]);
+    // Use userPhone instead of user object to avoid infinite loops from new object references
+  }, [rawId, navigate, userPhone, status]);
+
+  const isScanningRef = useRef(false);
 
   const handleDirectScan = async (id) => {
+    // Prevent multiple concurrent scans
+    if (isScanningRef.current) {
+      console.log("A scan is already in progress, skipping redundant call.");
+      return;
+    }
+
     let parsedNum = id.toString().replace('fragment_', '');
     parsedNum = parseInt(parsedNum, 10);
     
@@ -71,13 +85,26 @@ export default function ScanQR() {
     
     setFragmentNum(parsedNum);
     setStatus('processing');
+    isScanningRef.current = true;
 
-    const res = await apiCall('scan', { fragmentId: parsedNum });
-    if (res && res.success) {
-      setStatus('new');
-    } else {
+    try {
+      console.log(`Oracle, I request knowledge of Fragment ${parsedNum}...`);
+      const res = await apiCall('scan', { fragmentId: parsedNum });
+      
+      if (res && res.success) {
+        console.log("Oracle has granted the vision!");
+        setStatus('new');
+      } else {
+        console.warn("Oracle refused or failed:", res);
+        setStatus('error');
+        setErrorMessage(res?.error || 'The Oracle is silent.');
+      }
+    } catch (err) {
+      console.error("Communication with the Oracle failed:", err);
       setStatus('error');
-      setErrorMessage(res?.error || 'The Oracle is silent.');
+      setErrorMessage('A distortion in the aether has occurred.');
+    } finally {
+      isScanningRef.current = false;
     }
   };
 

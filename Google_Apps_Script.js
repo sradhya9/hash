@@ -14,7 +14,15 @@
 function doPost(e) {
   try {
     const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-    const data = JSON.parse(e.postData.contents);
+    
+    // Handle both POST data and GET parameters
+    let data;
+    if (e.postData && e.postData.contents) {
+      data = JSON.parse(e.postData.contents);
+    } else {
+      data = e.parameter;
+    }
+    
     const { action, name, phone, fragmentId } = data;
     
     if (!phone) return buildSuccess({ error: "Phone required" });
@@ -37,7 +45,7 @@ function doPost(e) {
          const newRow = [name || "Unknown", phone];
          for(let k=0; k<16; k++) newRow.push(false);
          sheet.appendRow(newRow);
-         rowIndex = sheet.getLastRow() - 1; 
+         rowIndex = sheet.getLastRow() - 1; // 0-indexed index of the last row
          isNewUser = true;
       } else {
          return buildSuccess({ error: "User not found." });
@@ -47,13 +55,18 @@ function doPost(e) {
     if (action === 'scan' && fragmentId) {
        const colIndex = headers.indexOf(`QR${fragmentId}`);
        if (colIndex !== -1) {
-          sheet.getRange(rowIndex + 1 + (isNewUser ? 1 : 0), colIndex + 1).setValue(true);
+          // Range is 1-indexed. rowIndex is 0-indexed.
+          // +1 to convert to 1-indexed.
+          sheet.getRange(rowIndex + 1, colIndex + 1).setValue(true);
        }
     }
 
-    const updatedValues = sheet.getDataRange().getValues();
-    const userRow = updatedValues[isNewUser ? updatedValues.length - 1 : rowIndex];
+    // Refresh data to get current progress
+    const finalValues = sheet.getDataRange().getValues();
+    const userRow = finalValues[rowIndex];
     const progress = [];
+    
+    // Scan columns labeled QR1...QR16
     for(let i=1; i<=16; i++) {
        const cIdx = headers.indexOf(`QR${i}`);
        if(cIdx !== -1 && userRow[cIdx] === true) {
@@ -69,7 +82,7 @@ function doPost(e) {
     });
 
   } catch(err) {
-    return buildSuccess({ error: err.toString() });
+    return buildSuccess({ error: "Oracle Error: " + err.toString() });
   }
 }
 
@@ -78,10 +91,6 @@ function buildSuccess(res) {
         .setMimeType(ContentService.MimeType.JSON);
 }
 
-function doOptions(e) {
-  return ContentService.createTextOutput("")
-    .setMimeType(ContentService.MimeType.JSON)
-    .setHeader("Access-Control-Allow-Origin", "*")
-    .setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
-    .setHeader("Access-Control-Allow-Headers", "Content-Type");
+function doGet(e) {
+  return doPost(e);
 }
