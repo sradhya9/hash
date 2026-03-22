@@ -27,42 +27,27 @@ export default function ScanQR() {
   }, [rawId]);
 
   useEffect(() => {
-    if (fragmentNum && canvasRef.current) {
-      const canvas = canvasRef.current;
-      const ctx = canvas.getContext('2d');
-      canvas.width = 600;
-      canvas.height = 600;
-
-      ctx.fillStyle = '#0B0F1A';
-      ctx.fillRect(0, 0, 600, 600);
-      
-      ctx.strokeStyle = '#00E5FF';
-      ctx.lineWidth = 10;
-      ctx.strokeRect(20, 20, 560, 560);
-      
-      ctx.beginPath();
-      ctx.moveTo(300, 100);
-      ctx.lineTo(400, 300);
-      ctx.lineTo(300, 500);
-      ctx.lineTo(200, 300);
-      ctx.closePath();
-      ctx.fillStyle = 'rgba(176, 38, 255, 0.4)';
-      ctx.fill();
-      ctx.strokeStyle = '#FFD700';
-      ctx.lineWidth = 4;
-      ctx.stroke();
-
-      ctx.fillStyle = '#FFFFFF';
-      ctx.font = 'bold 50px Courier New, monospace';
-      ctx.textAlign = 'center';
-      ctx.fillText(`HASH RELIC`, 300, 250);
-      
-      ctx.fillStyle = '#00E5FF';
-      ctx.font = 'bold 80px sans-serif';
-      ctx.fillText(`${fragmentNum} / 16`, 300, 350);
-
-      const url = canvas.toDataURL('image/png');
-      setDataUrl(url);
+    if (fragmentNum) {
+      const fetchCustomImage = async () => {
+        try {
+          // Attempt PNG first
+          let res = await fetch(`/hash_fragment_${fragmentNum}.png`);
+          if (!res.ok) {
+            // Fallback to JPG
+            res = await fetch(`/hash_fragment_${fragmentNum}.jpg`);
+          }
+          if (res.ok) {
+            const blob = await res.blob();
+            const objectUrl = URL.createObjectURL(blob);
+            setDataUrl(objectUrl);
+          } else {
+            console.error(`Please put hash_fragment_${fragmentNum}.png in the public/ folder.`);
+          }
+        } catch (error) {
+           console.error("Error fetching badge image:", error);
+        }
+      };
+      fetchCustomImage();
     }
   }, [fragmentNum]);
 
@@ -93,17 +78,19 @@ export default function ScanQR() {
         <h1 className="cinzel" style={{ color: 'var(--accent-gold)', marginBottom: '10px' }}>Badge Discovered</h1>
         <p style={{ color: 'var(--text-secondary)', marginBottom: '30px' }}>This is fragment {fragmentNum} of 16.</p>
 
-        <canvas ref={canvasRef} style={{ display: 'none' }}></canvas>
-
-        {dataUrl && (
+        {dataUrl ? (
           <img src={dataUrl} alt={`Fragment ${fragmentNum}`} style={{ width: '100%', borderRadius: '12px', marginBottom: '20px', border: '2px solid var(--accent-blue)', boxShadow: 'var(--glow-shadow)' }} />
+        ) : (
+          <div style={{ width: '100%', aspectRatio: '1/1', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px dashed var(--text-secondary)', marginBottom: '20px' }}>Loading your custom badge...</div>
         )}
 
-        <a href={dataUrl} download={`hash_fragment_${fragmentNum}.png`} style={{ textDecoration: 'none' }}>
-           <GlowingButton style={{ marginBottom: '15px' }}>
-             Download Badge
-           </GlowingButton>
-        </a>
+        {dataUrl && (
+          <a href={dataUrl} download={`hash_fragment_${fragmentNum}.png`} style={{ textDecoration: 'none' }}>
+             <GlowingButton style={{ marginBottom: '15px' }}>
+               Download Badge
+             </GlowingButton>
+          </a>
+        )}
         <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>Save this to your camera roll. You will need to upload all 16 to ascend.</p>
       </motion.div>
 
