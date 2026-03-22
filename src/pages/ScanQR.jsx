@@ -1,110 +1,113 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
-import { useGame } from '../contexts/GameContext';
-import { useAuth } from '../contexts/AuthContext';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import GlowingButton from '../components/GlowingButton';
+import BottomNav from '../components/BottomNav';
 
 export default function ScanQR() {
   const [searchParams] = useSearchParams();
-  const fragmentId = searchParams.get('id');
-  const { unlockFragment, loading: gameLoading } = useGame();
-  const { currentUser } = useAuth();
+  const rawId = searchParams.get('id');
   const navigate = useNavigate();
+  const canvasRef = useRef(null);
 
-  const [status, setStatus] = useState('processing');
+  const [fragmentNum, setFragmentNum] = useState(null);
+  const [dataUrl, setDataUrl] = useState('');
+
+  const TOTAL_FRAGMENTS = 16;
 
   useEffect(() => {
-    if (!currentUser) {
-      setStatus('unauth');
-      return;
-    }
-
-    if (gameLoading) return;
-
-    if (!fragmentId) {
-      setStatus('waiting');
-      return;
-    }
-
-    const processScan = async () => {
-      const res = await unlockFragment(fragmentId);
-      setStatus(res.status); // 'new', 'duplicate', 'error'
-    };
-
-    processScan();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentUser, fragmentId, gameLoading]);
-
-  const renderContent = () => {
-    if (status === 'waiting') {
-      return (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-          <h2 className="cinzel" style={{ color: 'var(--accent-blue)' }}>Camera Ready</h2>
-          <p style={{ margin: '20px 0', color: 'var(--text-secondary)' }}>Use your phone's native camera app to scan the physical relic QR codes hidden around the event!</p>
-          <GlowingButton onClick={() => navigate('/dashboard')} variant="secondary">Return</GlowingButton>
-        </motion.div>
-      );
-    }
-
-    if (status === 'unauth') {
-      return (
-        <motion.div initial={{ scale: 0.8 }} animate={{ scale: 1 }}>
-          <h2 className="cinzel" style={{ color: 'var(--accent-gold)' }}>Authentication Required</h2>
-          <p style={{ margin: '20px 0', color: 'var(--text-secondary)' }}>You must be a sworn warrior to collect this logic.</p>
-          <GlowingButton onClick={() => navigate('/login')}>Login to Claim</GlowingButton>
-        </motion.div>
-      );
-    }
+    if (!rawId) return;
     
-    if (status === 'processing') {
-      return (
-        <motion.div animate={{ rotate: 360 }} transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}>
-          <div style={{ width: '50px', height: '50px', border: '3px solid var(--accent-blue)', borderTopColor: 'transparent', borderRadius: '50%' }} />
-        </motion.div>
-      );
+    let parsedNum = rawId.toString().replace('fragment_', '');
+    parsedNum = parseInt(parsedNum, 10);
+    
+    if (!isNaN(parsedNum) && parsedNum >= 1 && parsedNum <= TOTAL_FRAGMENTS) {
+      setFragmentNum(parsedNum);
     }
+  }, [rawId]);
 
-    if (status === 'new') {
-      return (
-        <motion.div initial={{ scale: 0.5, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: 'spring' }}>
-          <div className="glass-panel" style={{ padding: '40px', background: 'rgba(0, 229, 255, 0.1)', boxShadow: '0 0 50px rgba(0, 229, 255, 0.4)' }}>
-            <h1 className="cinzel" style={{ color: 'var(--accent-blue)', textShadow: 'var(--glow-shadow)', marginBottom: '20px' }}>⚡ Fragment Acquired</h1>
-            <p style={{ color: 'var(--text-primary)', marginBottom: '30px' }}>The power of {fragmentId.replace('_', ' ').toUpperCase()} flows through you.</p>
-            <GlowingButton onClick={() => navigate('/dashboard')}>Return to Relic</GlowingButton>
-          </div>
-        </motion.div>
-      );
+  useEffect(() => {
+    if (fragmentNum && canvasRef.current) {
+      const canvas = canvasRef.current;
+      const ctx = canvas.getContext('2d');
+      canvas.width = 600;
+      canvas.height = 600;
+
+      ctx.fillStyle = '#0B0F1A';
+      ctx.fillRect(0, 0, 600, 600);
+      
+      ctx.strokeStyle = '#00E5FF';
+      ctx.lineWidth = 10;
+      ctx.strokeRect(20, 20, 560, 560);
+      
+      ctx.beginPath();
+      ctx.moveTo(300, 100);
+      ctx.lineTo(400, 300);
+      ctx.lineTo(300, 500);
+      ctx.lineTo(200, 300);
+      ctx.closePath();
+      ctx.fillStyle = 'rgba(176, 38, 255, 0.4)';
+      ctx.fill();
+      ctx.strokeStyle = '#FFD700';
+      ctx.lineWidth = 4;
+      ctx.stroke();
+
+      ctx.fillStyle = '#FFFFFF';
+      ctx.font = 'bold 50px Courier New, monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText(`HASH RELIC`, 300, 250);
+      
+      ctx.fillStyle = '#00E5FF';
+      ctx.font = 'bold 80px sans-serif';
+      ctx.fillText(`${fragmentNum} / 16`, 300, 350);
+
+      const url = canvas.toDataURL('image/png');
+      setDataUrl(url);
     }
+  }, [fragmentNum]);
 
-    if (status === 'duplicate') {
-       return (
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-          <h2 className="cinzel" style={{ color: 'var(--text-secondary)' }}>Already Possessed</h2>
-          <p style={{ margin: '20px 0' }}>You already hold this fragment's power.</p>
-          <GlowingButton onClick={() => navigate('/dashboard')} variant="secondary">Back</GlowingButton>
-        </motion.div>
-      );
-    }
-
+  if (!rawId) {
     return (
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-        <h2 style={{ color: '#ff4444' }}>Invalid Fragment Code</h2>
-        <GlowingButton onClick={() => navigate('/dashboard')} variant="secondary" className="mt-4" style={{ marginTop: '20px' }}>Return</GlowingButton>
-      </motion.div>
+      <div style={{ padding: '20px', minHeight: '100dvh', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+        <h2 className="cinzel" style={{ color: 'var(--accent-blue)' }}>Scanner Active</h2>
+        <p style={{ margin: '20px 0', color: 'var(--text-secondary)' }}>Use your phone's native camera app to scan the physical QR codes hidden around the event!<br/><br/>Scanning will bring you back here to download each badge to your phone.</p>
+        <BottomNav />
+      </div>
     );
-  };
+  }
+
+  if (!fragmentNum) {
+    return (
+      <div style={{ padding: '20px', minHeight: '100dvh', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+        <h2 style={{ color: '#ff4444' }}>Invalid Fragment Code</h2>
+        <GlowingButton onClick={() => navigate('/scan')} variant="secondary" style={{ marginTop: '20px' }}>Return</GlowingButton>
+        <BottomNav />
+      </div>
+    );
+  }
 
   return (
-    <div style={{
-      display: 'flex', alignItems: 'center', justifyContent: 'center',
-      height: '100dvh', padding: '20px', textAlign: 'center'
-    }}>
-      <AnimatePresence mode="wait">
-        <motion.div key={status} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} style={{ width: '100%' }}>
-          {renderContent()}
-        </motion.div>
-      </AnimatePresence>
+    <div style={{ padding: '20px', paddingBottom: '100px', minHeight: '100dvh', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+      
+      <motion.div initial={{ scale: 0.5, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: 'spring' }} className="glass-panel" style={{ padding: '30px', maxWidth: '350px', width: '100%' }}>
+        <h1 className="cinzel" style={{ color: 'var(--accent-gold)', marginBottom: '10px' }}>Badge Discovered</h1>
+        <p style={{ color: 'var(--text-secondary)', marginBottom: '30px' }}>This is fragment {fragmentNum} of 16.</p>
+
+        <canvas ref={canvasRef} style={{ display: 'none' }}></canvas>
+
+        {dataUrl && (
+          <img src={dataUrl} alt={`Fragment ${fragmentNum}`} style={{ width: '100%', borderRadius: '12px', marginBottom: '20px', border: '2px solid var(--accent-blue)', boxShadow: 'var(--glow-shadow)' }} />
+        )}
+
+        <a href={dataUrl} download={`hash_fragment_${fragmentNum}.png`} style={{ textDecoration: 'none' }}>
+           <GlowingButton style={{ marginBottom: '15px' }}>
+             Download Badge
+           </GlowingButton>
+        </a>
+        <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>Save this to your camera roll. You will need to upload all 16 to ascend.</p>
+      </motion.div>
+
+      <BottomNav />
     </div>
   );
 }
