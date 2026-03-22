@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
-const GREEK_SYMBOLS = ['Ω', 'Ψ', 'Δ', 'Σ', 'Φ', 'Θ', 'Λ', 'Ξ', '✧', '♦', '✦', '⚡'];
+const GREEK_SYMBOLS = ['Ω', 'Ψ', 'Δ', 'Σ', 'Φ', 'Θ', 'Λ', 'Ξ', '✧', '♦', '✦', 'π', '♅', 'ω', 'Ξ', '♆', 'α', 'β', 'ε', 'σ', 'Φ'];
 
 export default function GreekBackground() {
   const [elements, setElements] = useState([]);
