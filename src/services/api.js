@@ -18,7 +18,7 @@ export const logoutLocally = () => {
 
 export const apiCall = async (action, payload = {}) => {
   const user = getUserLocally();
-  if (!user && action !== 'register') return { error: "Not logged in" };
+  if (!user && action !== 'register') return { error: "Thou art unidentified in this realm." };
 
   const data = {
     action,
@@ -40,6 +40,6 @@ export const apiCall = async (action, payload = {}) => {
     return json;
   } catch (err) {
     console.error("API Error:", err);
-    return { error: "Network error fetching against Google Sheets." };
+    return { error: "The Oracle is silent. The thread of fate has been severed." };
   }
 };

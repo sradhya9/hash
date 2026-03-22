@@ -4,6 +4,8 @@ import Login from './pages/Login'
 import Dashboard from './pages/Dashboard'
 import ScanQR from './pages/ScanQR'
 import Reward from './pages/Reward'
+import Restore from './pages/Restore'
+import Admin from './pages/Admin'
 import GreekBackground from './components/GreekBackground'
 
 function App() {
@@ -16,6 +18,8 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/scan" element={<ScanQR />} />
         <Route path="/reward" element={<Reward />} />
+        <Route path="/restore" element={<Restore />} />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
     </div>
   )

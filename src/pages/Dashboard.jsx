@@ -42,16 +42,16 @@ export default function Dashboard() {
     <div style={{ padding: '20px', paddingBottom: '100px', minHeight: '100dvh' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px', marginTop: '10px' }}>
         <div>
-          <h2 className="cinzel" style={{ fontSize: '1.2rem', color: 'var(--accent-gold)' }}>Relic</h2>
-          <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>Welcome, {user.name}</p>
+          <h2 className="cinzel" style={{ fontSize: '1.4rem', color: 'var(--accent-gold)' }}>Divine Reliquary</h2>
+          <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', fontStyle: 'italic' }}>Welcome, {user.name}</p>
         </div>
-        <button onClick={handleLogout} style={{ background: 'none', border: '1px solid var(--glass-border)', color: 'var(--text-secondary)', padding: '8px 12px', borderRadius: '20px', cursor: 'pointer' }}>Disconnect</button>
+        <button onClick={handleLogout} style={{ background: 'none', border: '1px solid var(--glass-border)', color: 'var(--text-secondary)', padding: '8px 16px', borderRadius: '20px', cursor: 'pointer', fontFamily: 'Cinzel', fontSize: '0.7rem' }}>Sever Ties</button>
       </div>
 
       <motion.div className="glass-panel" style={{ padding: '20px', marginBottom: '30px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
-          <span style={{ fontWeight: 'bold' }}>Database Sync</span>
-          <span style={{ color: 'var(--accent-blue)' }}>{loading ? 'Fetching Sheet...' : `${fragments.length} / ${TOTAL_FRAGMENTS}`}</span>
+          <span style={{ fontWeight: 'bold' }}>Divine Sync</span>
+          <span style={{ color: 'var(--accent-gold)', fontWeight: 'bold' }}>{loading ? 'Consulting Oracle...' : `${fragments.length} / ${TOTAL_FRAGMENTS}`}</span>
         </div>
         <div style={{ width: '100%', height: '8px', background: 'rgba(255,255,255,0.1)', borderRadius: '4px', overflow: 'hidden' }}>
           <motion.div 
@@ -67,7 +67,7 @@ export default function Dashboard() {
 
       {fragments.length === TOTAL_FRAGMENTS && (
         <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} style={{ textAlign: 'center', marginTop: '30px' }}>
-          <GlowingButton onClick={() => navigate('/reward')} variant="gold">Claim Divine Reward</GlowingButton>
+          <GlowingButton onClick={() => navigate('/reward')} variant="gold">Receive Divine Favor</GlowingButton>
         </motion.div>
       )}
 

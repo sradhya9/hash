@@ -1,17 +1,17 @@
 :root {
   /* Dark space/mythology theme */
-  --bg-color: #0B0F1A;
-  --bg-gradient: radial-gradient(circle at top center, #1A2436 0%, #0B0F1A 100%);
-  --accent-blue: #0A6EBD; /* Deep Mystical Blue */
-  --accent-purple: #4A148C; /* Deep Royal Purple */
-  --accent-gold: #D4AF37; /* Ancient Gold */
-  --text-primary: #FDFBF7; /* Stone White */
-  --text-secondary: #C8BCA7; /* Aged Stone */
-  --card-bg: rgba(15, 20, 30, 0.75); /* Darker slate/stone feel */
-  --glass-border: rgba(212, 175, 55, 0.3); /* Gold-tinted glass border */
-  --glow-shadow: 0 0 20px rgba(10, 110, 189, 0.4);
-  --gold-glow: 0 0 30px rgba(212, 175, 55, 0.4);
-  --border-radius: 8px; /* Slightly sharper for classical look */
+  --bg-color: #FDF5E6; /* Old Lace / Light Beige */
+  --bg-gradient: radial-gradient(circle at top center, #FFF8DC 0%, #FDF5E6 100%);
+  --accent-blue: #1A5276; /* Darker Mystical Blue for contrast */
+  --accent-purple: #5B2C6F; /* Darker Royal Purple */
+  --accent-gold: #B8860B; /* Darker Ancient Gold / Dark Goldenrod */
+  --text-primary: #2C1E12; /* Dark Bronze/Stone for light theme */
+  --text-secondary: #5D4037; /* Brownish Stone */
+  --card-bg: rgba(255, 255, 255, 0.45); /* Light Glass */
+  --glass-border: rgba(184, 134, 11, 0.35); /* Gold-tinted border */
+  --glow-shadow: 0 4px 15px rgba(184, 134, 11, 0.2);
+  --gold-glow: 0 0 25px rgba(184, 134, 11, 0.3);
+  --border-radius: 12px;
 }
 
 * {

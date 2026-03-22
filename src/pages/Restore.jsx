@@ -40,8 +40,8 @@ export default function Restore() {
   return (
     <div style={{ padding: '20px', paddingBottom: '100px', minHeight: '100dvh', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <div style={{ marginTop: '20px', textAlign: 'center', marginBottom: '40px' }}>
-        <h2 className="cinzel" style={{ fontSize: '1.8rem', color: 'var(--accent-purple)' }}>Ascension Portal</h2>
-        <p style={{ color: 'var(--text-secondary)', marginTop: '10px' }}>Select and upload your collected fragment badges to restore the relic.</p>
+        <h2 className="cinzel" style={{ fontSize: '1.8rem', color: 'var(--accent-gold)' }}>Portal of Apotheosis</h2>
+        <p style={{ color: 'var(--text-secondary)', marginTop: '10px', fontStyle: 'italic' }}>Offer thy collected shards to the eternal flame to restore the relic.</p>
       </div>
 
       <motion.div className="glass-panel" style={{ padding: '30px', width: '100%', maxWidth: '350px', textAlign: 'center' }}>
@@ -51,7 +51,7 @@ export default function Restore() {
         ) : (
           <>
             <div style={{ position: 'relative', overflow: 'hidden', display: 'inline-block', width: '100%' }}>
-              <GlowingButton variant="secondary">Select Badge Files</GlowingButton>
+              <GlowingButton variant="secondary">Present the Shards</GlowingButton>
               <input 
                 type="file" 
                 multiple 
@@ -61,8 +61,8 @@ export default function Restore() {
               />
             </div>
             {collectedPieces.length === 0 && (
-              <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginTop: '15px' }}>
-                You must have all 16 distinct `hash_fragment_N.png` files from the scanners!
+              <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginTop: '15px', fontStyle: 'italic' }}>
+                Thou must possess all 16 divine shards to proceed.
               </p>
             )}
           </>
@@ -70,16 +70,16 @@ export default function Restore() {
 
         {collectedPieces.length > 0 && !analyzing && (
            <div style={{ marginTop: '30px' }}>
-             <h3 style={{ color: 'var(--accent-blue)' }}>Fragments Detected</h3>
-             <h1 style={{ fontSize: '3rem', margin: '10px 0', color: collectedPieces.length === TOTAL_FRAGMENTS ? 'var(--accent-gold)' : '#fff' }}>
+             <h3 className="cinzel" style={{ color: 'var(--accent-gold)' }}>Presence Confirmed</h3>
+             <h1 style={{ fontSize: '3.5rem', margin: '10px 0', color: collectedPieces.length === TOTAL_FRAGMENTS ? 'var(--accent-gold)' : 'var(--text-primary)', fontFamily: 'Cinzel' }}>
                {collectedPieces.length} / {TOTAL_FRAGMENTS}
              </h1>
              
-             {collectedPieces.length === TOTAL_FRAGMENTS ? (
-               <GlowingButton onClick={handleAscend} variant="gold" style={{ marginTop: '20px' }}>Initialize Ascension</GlowingButton>
-             ) : (
-               <p style={{ color: '#ff4444', fontSize: '0.9rem', marginTop: '10px' }}>You lack the required power. Return here when you have scanned all 16 fragments.</p>
-             )}
+              {collectedPieces.length === TOTAL_FRAGMENTS ? (
+                <GlowingButton onClick={handleAscend} variant="gold" style={{ marginTop: '20px' }}>Commence Apotheosis</GlowingButton>
+              ) : (
+                <p style={{ color: '#B22222', fontSize: '0.9rem', marginTop: '10px', fontStyle: 'italic' }}>Thou lackest the required power. Return when all 16 shards are gathered.</p>
+              )}
            </div>
         )}
       </motion.div>

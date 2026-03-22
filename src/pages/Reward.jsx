@@ -49,17 +49,22 @@ export default function Reward() {
         Ascension Complete
       </motion.h1>
 
-      <motion.p
+      <motion.div
         initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2 }}
-        style={{ color: 'var(--text-primary)', marginBottom: '40px', lineHeight: '1.6', zIndex: 1 }}
+        style={{ zIndex: 1 }}
       >
-        You have restored the divine seal of HASH.<br/>
-        Show this screen to the Game Master to claim your reward.
-      </motion.p>
+        <h1 className="cinzel" style={{ fontSize: '2.5rem', color: 'var(--accent-gold)', marginBottom: '15px' }}>Divine Favor Received</h1>
+        <p style={{ color: 'var(--text-secondary)', marginBottom: '40px', lineHeight: '1.6', fontStyle: 'italic' }}>
+          The Gods have witnessed thy journey. The relic is restored, and thy name is eternalized in Olympus.
+        </p>
+        <p style={{ color: 'var(--text-primary)', marginBottom: '40px', lineHeight: '1.6' }}>
+          Show this screen to the Game Master to claim your reward.
+        </p>
+      </motion.div>
 
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2.5 }} style={{ zIndex: 1, width: '100%' }}>
-        <GlowingButton onClick={() => navigate('/restore')} variant="secondary">
-          Return to Portal
+        <GlowingButton onClick={() => navigate('/dashboard')} variant="secondary">
+          Return to Reliquary
         </GlowingButton>
       </motion.div>
     </div>

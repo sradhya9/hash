@@ -26,29 +26,30 @@ export default function Landing() {
         style={{ zIndex: 1 }}
       >
         <h1 className="cinzel" style={{
-          fontSize: '3rem',
+          fontSize: '3.5rem',
           color: 'var(--accent-gold)',
-          textShadow: 'var(--gold-glow)',
+          textShadow: '2px 2px 0px rgba(0,0,0,0.1)',
           marginBottom: '10px'
         }}>
           HASH
         </h1>
         <h2 style={{
-          fontSize: '1.2rem',
+          fontSize: '1.4rem',
           color: 'var(--text-primary)',
           marginBottom: '40px',
-          fontWeight: 300,
-          letterSpacing: '2px'
+          fontWeight: 400,
+          letterSpacing: '4px',
+          textTransform: 'uppercase'
         }}>
           The Fragmented Odyssey
         </h2>
 
-        <p style={{ color: 'var(--text-secondary)', marginBottom: '50px', maxWidth: '300px', lineHeight: '1.6' }}>
-          Collect the 16 fragments scattered across the realm. Restore the divine relic.
+        <p style={{ color: 'var(--text-secondary)', marginBottom: '50px', maxWidth: '300px', lineHeight: '1.7', fontStyle: 'italic' }}>
+          Collect the 16 divine shards scattered across the mortal realm. Restore the relic of the Gods.
         </p>
 
         <GlowingButton onClick={() => navigate('/login')}>
-          Begin Quest
+          Embark on Odyssey
         </GlowingButton>
       </motion.div>
     </div>

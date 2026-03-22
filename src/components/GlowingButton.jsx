@@ -6,10 +6,10 @@ export default function GlowingButton({ children, onClick, variant = 'primary', 
     switch (variant) {
       case 'gold':
         return {
-          background: 'rgba(212, 175, 55, 0.1)',
-          color: 'var(--accent-gold)',
-          border: '2px solid var(--accent-gold)',
-          boxShadow: 'var(--gold-glow)',
+          background: 'linear-gradient(135deg, #D4AF37, #B8860B)',
+          color: '#FDF5E6',
+          border: 'none',
+          boxShadow: '0 4px 15px rgba(184, 134, 11, 0.4)',
           fontFamily: 'Cinzel, serif',
           letterSpacing: '2px'
         };
@@ -23,11 +23,11 @@ export default function GlowingButton({ children, onClick, variant = 'primary', 
       case 'primary':
       default:
         return {
-          background: 'linear-gradient(135deg, rgba(10, 110, 189, 0.2), rgba(74, 20, 140, 0.2))',
+          background: 'rgba(255, 255, 255, 0.8)',
           color: 'var(--accent-gold)',
-          border: '1px solid var(--accent-gold)',
-          textShadow: '0 2px 4px rgba(0,0,0,0.8)',
-          boxShadow: 'var(--glow-shadow)',
+          border: '2px solid var(--accent-gold)',
+          textShadow: '0 1px 2px rgba(255,255,255,0.5)',
+          boxShadow: '0 4px 15px rgba(0,0,0,0.05)',
           fontFamily: 'Cinzel, serif',
           letterSpacing: '1px'
         };

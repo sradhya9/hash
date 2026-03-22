@@ -79,9 +79,10 @@ export default function GreekBackground() {
           style={{
             position: 'absolute',
             color: 'var(--accent-gold)',
-            fontSize: '3rem',
+            fontSize: '3.5rem',
             fontFamily: 'Cinzel, serif',
-            textShadow: '0 0 15px rgba(212, 175, 55, 0.5)',
+            textShadow: '0 0 10px rgba(184, 134, 11, 0.3)',
+            filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))',
           }}
         >
           {el.symbol}

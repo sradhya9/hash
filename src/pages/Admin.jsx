@@ -13,8 +13,8 @@ export default function Admin() {
   if (!currentUser) {
     return (
       <div style={{ padding: '20px', textAlign: 'center', paddingTop: '100px' }}>
-        <h2>Login required for Admin Panel</h2>
-        <GlowingButton onClick={() => navigate('/login')} style={{ marginTop: '20px' }}>Go to Login</GlowingButton>
+        <h2 className="cinzel">Access requires Divine Authorization</h2>
+        <GlowingButton onClick={() => navigate('/login')} style={{ marginTop: '20px' }}>Identify Thyself</GlowingButton>
       </div>
     );
   }
@@ -27,12 +27,12 @@ export default function Admin() {
 
   return (
     <div style={{ padding: '20px', paddingBottom: '100px', minHeight: '100dvh' }}>
-      <h2 className="cinzel" style={{ color: 'var(--accent-purple)', textAlign: 'center', marginBottom: '20px', marginTop: '20px' }}>Admin / Test Panel</h2>
+      <h2 className="cinzel" style={{ color: 'var(--accent-gold)', textAlign: 'center', marginBottom: '20px', marginTop: '20px' }}>Oracle's Scrying Chamber</h2>
       
       <div className="glass-panel" style={{ padding: '20px', marginBottom: '20px' }}>
-        <h3 style={{ marginBottom: '15px' }}>Simulate Scan</h3>
-        <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginBottom: '15px' }}>
-          Clicking a button simulates scanning a QR code for that specific fragment.
+        <h3 className="cinzel" style={{ marginBottom: '15px', fontSize: '1.2rem' }}>Invoke Manifestation</h3>
+        <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginBottom: '15px', fontStyle: 'italic' }}>
+          By clicking a symbol, thou shalt manifest the corresponding shard.
         </p>
         
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '10px' }}>
@@ -56,9 +56,9 @@ export default function Admin() {
       </div>
 
       <div className="glass-panel" style={{ padding: '20px', textAlign: 'center' }}>
-        <h3 style={{ marginBottom: '15px', color: '#ff4444' }}>Danger Zone</h3>
-        <GlowingButton onClick={() => { if(window.confirm('Clear all progress?')) clearProgress(); }} variant="secondary" style={{ borderColor: '#ff4444', color: '#ff4444' }}>
-          Reset Collection
+        <h3 className="cinzel" style={{ marginBottom: '15px', color: '#B22222' }}>Gate of Tartarus</h3>
+        <GlowingButton onClick={() => { if(window.confirm('Wilt thou truly expunge thy divine progress?')) clearProgress(); }} variant="secondary" style={{ borderColor: '#B22222', color: '#B22222' }}>
+          Expunge Progress
         </GlowingButton>
       </div>
 

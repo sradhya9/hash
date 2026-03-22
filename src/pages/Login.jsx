@@ -25,8 +25,8 @@ export default function Login() {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    if (!name || name.length < 2) return setError('Please enter a valid name.');
-    if (!phone || phone.length < 5) return setError('Please enter a valid phone number.');
+    if (!name || name.length < 2) return setError('Thou must provide a worthy name.');
+    if (!phone || phone.length < 5) return setError('Thy identification number is incomplete.');
 
     setLoading(true);
     setError('');
@@ -43,7 +43,7 @@ export default function Login() {
         navigate('/dashboard');
       }
     } else {
-      setError(res?.error || 'Failed to connect to Google Sheets. Verify your App Script URL inside src/services/api.js!');
+      setError(res?.error || 'The Oracle is unreachable. Ensure thy connection to the heavens is stable.');
       setLoading(false);
     }
   };
@@ -51,22 +51,22 @@ export default function Login() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100dvh', padding: '20px', textAlign: 'center' }}>
       <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="glass-panel" style={{ padding: '40px 20px', width: '100%', maxWidth: '350px' }}>
-        <h2 className="cinzel" style={{ marginBottom: '10px', color: 'var(--accent-blue)' }}>Identify Thyself</h2>
-        <p style={{ color: 'var(--text-secondary)', marginBottom: '30px', fontSize: '0.9rem' }}>Enter your details to sync with the Google Sheet.</p>
+        <h2 className="cinzel" style={{ marginBottom: '10px', color: 'var(--accent-gold)' }}>Identify Thyself</h2>
+        <p style={{ color: 'var(--text-secondary)', marginBottom: '30px', fontSize: '0.9rem', fontStyle: 'italic' }}>Offer thy details to be inscribed in the sacred records.</p>
         
         {error && <div style={{ color: '#ff4444', marginBottom: '15px' }}>{error}</div>}
 
         <form onSubmit={handleRegister} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
           <input 
             type="text" placeholder="Full Name" value={name} onChange={e => setName(e.target.value)}
-            style={{ padding: '15px', borderRadius: '8px', border: '1px solid var(--glass-border)', background: 'rgba(0,0,0,0.5)', color: '#fff' }}
+            style={{ padding: '15px', borderRadius: '8px', border: '1px solid var(--glass-border)', background: 'rgba(255,255,255,0.6)', color: 'var(--text-primary)' }}
           />
           <input 
-            type="tel" placeholder="Phone Number" value={phone} onChange={e => setPhone(e.target.value)}
-            style={{ padding: '15px', borderRadius: '8px', border: '1px solid var(--glass-border)', background: 'rgba(0,0,0,0.5)', color: '#fff' }}
+            type="tel" placeholder="Identification Number" value={phone} onChange={e => setPhone(e.target.value)}
+            style={{ padding: '15px', borderRadius: '8px', border: '1px solid var(--glass-border)', background: 'rgba(255,255,255,0.6)', color: 'var(--text-primary)' }}
           />
           <GlowingButton type="submit" disabled={loading}>
-            {loading ? 'Connecting to Sheets...' : 'Enter the Odyssey'}
+            {loading ? 'Consulting the Oracle...' : 'Enter the Odyssey'}
           </GlowingButton>
         </form>
       </motion.div>

@@ -39,9 +39,11 @@ export default function FragmentGrid({ collectedFragments, total = 16 }) {
               alignItems: 'center',
               justifyContent: 'center',
               color: 'var(--text-secondary)',
-              fontSize: '1rem',
+              fontSize: '0.8rem',
               fontWeight: 'bold',
-              border: '1px dashed var(--glass-border)'
+              fontFamily: 'Cinzel',
+              border: '1px dashed var(--glass-border)',
+              background: 'rgba(0,0,0,0.03)'
             }}>
               {index + 1}
             </div>
