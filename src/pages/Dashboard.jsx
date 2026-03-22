@@ -58,7 +58,7 @@ export default function Dashboard() {
             initial={{ width: 0 }}
             animate={{ width: `${(fragments.length / TOTAL_FRAGMENTS) * 100}%` }}
             transition={{ duration: 1, ease: 'easeOut' }}
-            style={{ height: '100%', background: 'linear-gradient(90deg, var(--accent-blue), var(--accent-purple))' }}
+            style={{ height: '100%', background: 'linear-gradient(90deg, #f5f5dc, #556b2f)' }}
           />
         </div>
       </motion.div>

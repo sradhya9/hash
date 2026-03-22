@@ -8,7 +8,7 @@ export default function GlowingButton({ children, onClick, variant = 'primary', 
       case 'reliquary':
       case 'vision':
         return {
-          background: 'linear-gradient(135deg, #FFD700 0%, #B8860B 100%)',
+          background: 'linear-gradient(135deg, #5a4e0fff 0%, #B8860B 100%)',
           color: '#1a1a1a',
           border: '1px solid #FFF8DC',
           boxShadow: '0 4px 20px rgba(184, 134, 11, 0.5), inset 0 0 10px rgba(255, 255, 255, 0.3)',
@@ -47,9 +47,9 @@ export default function GlowingButton({ children, onClick, variant = 'primary', 
 
   return (
     <motion.button
-      whileHover={{ 
-        scale: 1.02, 
-        boxShadow: '0 0 30px rgba(212, 175, 55, 0.8)' 
+      whileHover={{
+        scale: 1.02,
+        boxShadow: '0 0 30px rgba(212, 175, 55, 0.8)'
       }}
       whileTap={{ scale: 0.98 }}
       onClick={onClick}

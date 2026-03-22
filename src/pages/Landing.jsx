@@ -12,11 +12,11 @@ export default function Landing() {
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
-      height: '100dvh',
-      padding: '20px',
+      minHeight: '100dvh',
+      padding: '40px 20px',
       textAlign: 'center',
       position: 'relative',
-      overflow: 'hidden'
+      overflow: 'auto'
     }}>
       {/* Background is now handled globally by GreekBackground in App.jsx */}
       <motion.div 

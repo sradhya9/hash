@@ -25,8 +25,13 @@ export default function Login() {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    if (!name || name.length < 2) return setError('Thou must provide a worthy name.');
-    if (!phone || phone.length < 5) return setError('Thy identification number is incomplete.');
+    if (!name || name.length < 2) return setError('Please provide your full name.');
+    
+    // Validate 10-digit phone number
+    const phoneRegex = /^[0-9]{10}$/;
+    if (!phone || !phoneRegex.test(phone)) {
+      return setError('Mobile Number must be exactly 10 digits.');
+    }
 
     setLoading(true);
     setError('');
@@ -43,13 +48,21 @@ export default function Login() {
         navigate('/dashboard');
       }
     } else {
-      setError(res?.error || 'The Oracle is unreachable. Ensure thy connection to the heavens is stable.');
+      setError(res?.error || 'Login failed. Ensure thy name and mobile number are correct.');
       setLoading(false);
     }
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100dvh', padding: '20px', textAlign: 'center' }}>
+    <div style={{ 
+      display: 'flex', 
+      flexDirection: 'column', 
+      alignItems: 'center', 
+      minHeight: '100dvh', 
+      padding: '40px 20px', 
+      textAlign: 'center',
+      overflow: 'auto'
+    }}>
       <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="glass-panel" style={{ padding: '40px 20px', width: '100%', maxWidth: '350px' }}>
         <h2 className="cinzel" style={{ marginBottom: '10px', color: 'var(--accent-gold)' }}>Identify Thyself</h2>
         <p style={{ color: 'var(--text-secondary)', marginBottom: '30px', fontSize: '0.9rem', fontStyle: 'italic' }}>Offer thy details to be inscribed in the sacred records.</p>
@@ -59,11 +72,11 @@ export default function Login() {
         <form onSubmit={handleRegister} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
           <input 
             type="text" placeholder="Full Name" value={name} onChange={e => setName(e.target.value)}
-            style={{ padding: '15px', borderRadius: '8px', border: '1px solid var(--glass-border)', background: 'rgba(255,255,255,0.6)', color: 'var(--text-primary)' }}
+            style={{ padding: '15px', borderRadius: '8px', border: '1px solid var(--glass-border)', background: 'rgba(255,255,255,0.1)', color: 'var(--text-primary)' }}
           />
           <input 
-            type="tel" placeholder="Identification Number" value={phone} onChange={e => setPhone(e.target.value)}
-            style={{ padding: '15px', borderRadius: '8px', border: '1px solid var(--glass-border)', background: 'rgba(255,255,255,0.6)', color: 'var(--text-primary)' }}
+            type="tel" placeholder="Mobile Number (10 digits)" value={phone} onChange={e => setPhone(e.target.value)}
+            style={{ padding: '15px', borderRadius: '8px', border: '1px solid var(--glass-border)', background: 'rgba(255,255,255,0.1)', color: 'var(--text-primary)' }}
           />
           <GlowingButton type="submit" disabled={loading}>
             {loading ? 'Consulting the Oracle...' : 'Enter the Odyssey'}

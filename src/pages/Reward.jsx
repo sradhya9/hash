@@ -2,16 +2,17 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import GlowingButton from '../components/GlowingButton';
+import BottomNav from '../components/BottomNav';
 
 export default function Reward() {
   const navigate = useNavigate();
 
   return (
     <div style={{
-      height: '100dvh', display: 'flex', flexDirection: 'column', 
-      alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '20px',
+      minHeight: '100dvh', display: 'flex', flexDirection: 'column', 
+      alignItems: 'center', textAlign: 'center', padding: '40px 20px 120px 20px',
       background: 'radial-gradient(circle at center, rgba(255,215,0,0.2) 0%, var(--bg-color) 70%)',
-      position: 'relative', overflow: 'hidden'
+      position: 'relative', overflow: 'auto'
     }}>
       
       {/* Light Burst */}
