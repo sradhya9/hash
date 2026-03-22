@@ -12,7 +12,15 @@ export default function Login() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (getUserLocally()) navigate('/dashboard');
+    if (getUserLocally()) {
+      const pending = localStorage.getItem('pending_scan');
+      if (pending) {
+        localStorage.removeItem('pending_scan');
+        navigate(`/scan?id=${pending}`);
+      } else {
+        navigate('/dashboard');
+      }
+    }
   }, [navigate]);
 
   const handleRegister = async (e) => {
@@ -27,7 +35,13 @@ export default function Login() {
     
     if (res && res.success) {
       saveUserLocally(name, phone);
-      navigate('/dashboard');
+      const pending = localStorage.getItem('pending_scan');
+      if (pending) {
+        localStorage.removeItem('pending_scan');
+        navigate(`/scan?id=${pending}`);
+      } else {
+        navigate('/dashboard');
+      }
     } else {
       setError(res?.error || 'Failed to connect to Google Sheets. Verify your App Script URL inside src/services/api.js!');
       setLoading(false);

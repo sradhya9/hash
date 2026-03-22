@@ -16,7 +16,7 @@ export default function BottomNav() {
       className="glass-panel"
       style={{
         position: 'fixed',
-        bottom: 20,
+        bottom: 'max(20px, env(safe-area-inset-bottom))',
         left: '50%',
         transform: 'translateX(-50%)',
         width: 'calc(100% - 40px)',

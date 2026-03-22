@@ -18,8 +18,7 @@ export default function ScanQR() {
   useEffect(() => {
     if (!user) {
       if (rawId) {
-        // They need to login, navigate to login but maybe keep the intent?
-        // Simple approach: redirect to login
+        localStorage.setItem('pending_scan', rawId);
         navigate('/login');
       } else {
         setStatus('waiting');
