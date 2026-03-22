@@ -18,16 +18,7 @@ export default function Landing() {
       position: 'relative',
       overflow: 'hidden'
     }}>
-      <div style={{
-        position: 'absolute', width: '200vw', height: '200vh',
-        background: 'radial-gradient(circle, rgba(0,229,255,0.05) 10%, transparent 10%), radial-gradient(circle, rgba(176,38,255,0.05) 10%, transparent 10%)',
-        backgroundSize: '30px 30px, 40px 40px',
-        backgroundPosition: '0 0, 15px 15px',
-        animation: 'float 20s linear infinite',
-        opacity: 0.5,
-        zIndex: 0
-      }} />
-
+      {/* Background is now handled globally by GreekBackground in App.jsx */}
       <motion.div 
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}

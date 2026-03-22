@@ -2,16 +2,16 @@
   /* Dark space/mythology theme */
   --bg-color: #0B0F1A;
   --bg-gradient: radial-gradient(circle at top center, #1A2436 0%, #0B0F1A 100%);
-  --accent-blue: #00E5FF;
-  --accent-purple: #B026FF;
-  --accent-gold: #FFD700;
-  --text-primary: #FFFFFF;
-  --text-secondary: #A0AABF;
-  --card-bg: rgba(26, 36, 54, 0.6);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --glow-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
-  --gold-glow: 0 0 30px rgba(255, 215, 0, 0.5);
-  --border-radius: 12px;
+  --accent-blue: #0A6EBD; /* Deep Mystical Blue */
+  --accent-purple: #4A148C; /* Deep Royal Purple */
+  --accent-gold: #D4AF37; /* Ancient Gold */
+  --text-primary: #FDFBF7; /* Stone White */
+  --text-secondary: #C8BCA7; /* Aged Stone */
+  --card-bg: rgba(15, 20, 30, 0.75); /* Darker slate/stone feel */
+  --glass-border: rgba(212, 175, 55, 0.3); /* Gold-tinted glass border */
+  --glow-shadow: 0 0 20px rgba(10, 110, 189, 0.4);
+  --gold-glow: 0 0 30px rgba(212, 175, 55, 0.4);
+  --border-radius: 8px; /* Slightly sharper for classical look */
 }
 
 * {

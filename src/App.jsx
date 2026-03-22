@@ -4,10 +4,12 @@ import Login from './pages/Login'
 import Dashboard from './pages/Dashboard'
 import ScanQR from './pages/ScanQR'
 import Reward from './pages/Reward'
+import GreekBackground from './components/GreekBackground'
 
 function App() {
   return (
     <div className="app-container">
+      <GreekBackground />
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
